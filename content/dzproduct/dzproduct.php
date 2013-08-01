@@ -77,4 +77,24 @@ class PlgContentDZProduct extends JPlugin
         
         return true;
     }
+    
+    public function onContentAfterDelete($context, $article)
+    {
+        if ($context != 'com_categories.category' && JRequest::getVar('extension') != 'com_dzproduct.items.catid')
+            return true;
+        $catid = $article->id;
+        
+        $relation_table = JTable::getInstance('Relation', 'DZProductTable');
+        if ($relation_table->load(array('catid' => $article->id)))
+            $id = $relation_table->id;
+        else
+            $id = 0;
+        
+        if ($id) {
+            $relation_model = JModelLegacy::getInstance('Relation', 'DZProductModel');
+            $relation_model->delete($id);
+        }
+        
+        return true;
+    }
 }
