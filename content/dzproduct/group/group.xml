@@ -5,7 +5,7 @@
             <field name="groupid" type="sql"
                 label="PLG_CONTENT_DZPRODUCT_LBL_GROUP"
                 description="PLG_CONTENT_DZPRODUCT_DESC_GROUP"
-                query="SELECT id, name FROM #__dzproduct_groups"
+                query="SELECT id, name FROM #__dzproduct_groups WHERE state = 1"
                 key_field="id" value_field="name">
                 <option value="">PLG_CONTENT_DZPRODUCT_SELECT_GROUP</option>
             </field>
